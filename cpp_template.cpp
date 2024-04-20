@@ -25,9 +25,38 @@ std::mt19937 random_new_seed(
     std::chrono::steady_clock::now().time_since_epoch().count());
 std::mt19937 random_fixed_seed(cMySchool);
 
+template <typename A, typename B, typename C>
+struct Triplet {
+  A first;
+  B second;
+  C third;
+};
+
+template <typename A, typename B, typename C, typename D>
+struct Quadro {
+  A first;
+  B second;
+  C third;
+  D fourth;
+};
+
 template <typename A, typename B>
 std::ostream& operator<<(std::ostream& ostream, const std::pair<A, B>& pair) {
   return ostream << '(' << pair.first << ", " << pair.second << ')';
+}
+
+template <typename A, typename B, typename C>
+std::ostream& operator<<(std::ostream& ostream,
+                         const Triplet<A, B, C>& triplet) {
+  return ostream << '(' << triplet.first << ", " << triplet.second << ", "
+                 << triplet.third << ')';
+}
+
+template <typename A, typename B, typename C, typename D>
+std::ostream& operator<<(std::ostream& ostream,
+                         const Quadro<A, B, C, D>& quadro) {
+  return ostream << '(' << quadro.first << ", " << quadro.second << ", "
+                 << quadro.third << ", " << quadro.fourth << ')';
 }
 
 template <typename TContainer,
@@ -42,12 +71,12 @@ std::ostream& operator<<(std::ostream& ostream, const TContainer& container) {
   return ostream << '}';
 }
 
-void DebugOut() { std::cerr << std::endl; }
+void DebugCerr() { std::cerr << std::endl; }
 
 template <typename Head, typename... Tail>
-void DebugOut(const Head& head, const Tail&... tail) {
+void DebugCerr(const Head& head, const Tail&... tail) {
   std::cerr << head << " ";
-  DebugOut(tail...);
+  DebugCerr(tail...);
 }
 
 template <typename T>
@@ -72,7 +101,13 @@ int RandRange(int min_val, int max_val, bool fix_seed = true) {
          min_val;
 }
 
-#define debug DebugOut
+template <typename T>
+void RemoveDuplicates(std::vector<T>& vec) {
+  std::sort(all(vec));
+  vec.resize(std::unique(all(vec)) - vec.begin());
+}
+
+#define debug DebugCerr
 
 }  // namespace MyTemplate
 
