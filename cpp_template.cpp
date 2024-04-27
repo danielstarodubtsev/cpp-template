@@ -15,6 +15,9 @@
 inline namespace MyTemplate {
 
 #define ll long long
+#define ld long double
+#define ull unsigned long long
+
 #define all(a) (a).begin(), (a).end()
 
 constexpr int cMySchool = 179;
@@ -31,6 +34,53 @@ struct Triplet {
   B second;
   C third;
 };
+
+template <typename A, typename B, typename C>
+bool operator==(const Triplet<A, B, C>& first, const Triplet<A, B, C>& second) {
+  return first.first == second.first && first.second == second.second &&
+         first.third == second.third;
+}
+
+template <typename A, typename B, typename C>
+bool operator!=(const Triplet<A, B, C>& first, const Triplet<A, B, C>& second) {
+  return !(first == second);
+}
+
+template <typename A, typename B, typename C>
+bool operator<(const Triplet<A, B, C>& first, const Triplet<A, B, C>& second) {
+  if (first.first < second.first) {
+    return true;
+  }
+
+  if (first.first > second.first) {
+    return false;
+  }
+
+  if (first.second < second.second) {
+    return true;
+  }
+
+  if (first.second > second.second) {
+    return false;
+  }
+
+  return first.third < second.third;
+}
+
+template <typename A, typename B, typename C>
+bool operator>(const Triplet<A, B, C>& first, const Triplet<A, B, C>& second) {
+  return second < first;
+}
+
+template <typename A, typename B, typename C>
+bool operator<=(const Triplet<A, B, C>& first, const Triplet<A, B, C>& second) {
+  return !(first > second);
+}
+
+template <typename A, typename B, typename C>
+bool operator>=(const Triplet<A, B, C>& first, const Triplet<A, B, C>& second) {
+  return !(first < second);
+}
 
 template <typename A, typename B, typename C, typename D>
 struct Quadro {
