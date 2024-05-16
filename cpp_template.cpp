@@ -1,4 +1,5 @@
 #include <algorithm>
+#include <cassert>
 #include <chrono>
 #include <cmath>
 #include <iomanip>
@@ -20,13 +21,8 @@ inline namespace MyTemplate {
 
 #define all(a) (a).begin(), (a).end()
 
-constexpr int cMySchool = 179;
 // constexpr int cInf = 2e9 + 9;
 // constexpr ll cInf = 2e18 + 9;
-
-std::mt19937 random_new_seed(
-    std::chrono::steady_clock::now().time_since_epoch().count());
-std::mt19937 random_fixed_seed(cMySchool);
 
 template <typename A, typename B, typename C>
 struct Triplet {
@@ -137,18 +133,6 @@ inline T Min(const std::vector<T>& vec) {
 template <typename T>
 inline T Max(const std::vector<T>& vec) {
   return *std::max_element(all(vec));
-}
-
-int RandRange(int min_val, int max_val, bool fix_seed = true) {
-  if (fix_seed) {
-    return std::abs(static_cast<int>(random_fixed_seed())) %
-               (max_val - min_val + 1) +
-           min_val;
-  }
-
-  return std::abs(static_cast<int>(random_new_seed())) %
-             (max_val - min_val + 1) +
-         min_val;
 }
 
 template <typename T>
